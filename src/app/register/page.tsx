@@ -45,6 +45,7 @@ const RegisterPage = () => {
     try {
       const res = await registerPatient(data);
       // console.log(res);
+
       if (res?.data?.id) {
         toast.success(res?.message);
         router.push("/login");
