@@ -1,7 +1,9 @@
 import HeroSection from "@/components/ui/HomePage/HeroSection/HeroSection";
+import HowItWorks from "@/components/ui/HomePage/HowItWorks/HowItWorks";
 import Specialist from "@/components/ui/HomePage/Specialist/Specialist";
+import Stats from "@/components/ui/HomePage/Stats/Stats";
 import TopRatedDoctors from "@/components/ui/HomePage/TopRatedDoctors/TopRatedDoctors";
-import { Button } from "@mui/material";
+import WhyUs from "@/components/ui/HomePage/WhyUs/WhyUs";
 
 const HomePage = () => {
   return (
@@ -9,6 +11,9 @@ const HomePage = () => {
       <HeroSection />
       <Specialist />
       <TopRatedDoctors />
+      <WhyUs />
+      <HowItWorks />
+      <Stats />
     </div>
   );
 };
