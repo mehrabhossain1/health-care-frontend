@@ -11,10 +11,11 @@ import {
 import Image from "next/image";
 import assets from "@/assets";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { toast } from "sonner";
 import { userLogin } from "@/services/actions/userLogin";
+import { storeUserInfo } from "@/services/auth.services";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export type FormValues = {
   email: string;
@@ -26,7 +27,6 @@ const LoginPage = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<FormValues>();
 
@@ -36,7 +36,7 @@ const LoginPage = () => {
       const res = await userLogin(values);
       if (res?.data?.accessToken) {
         toast.success(res?.message);
-
+        storeUserInfo({ accessToken: res?.data?.accessToken });
         router.push("/");
       }
     } catch (err: any) {
@@ -74,7 +74,7 @@ const LoginPage = () => {
             </Box>
             <Box>
               <Typography variant="h6" fontWeight={600}>
-                Login to Health Care
+                Login PH HealthCare
               </Typography>
             </Box>
           </Stack>

@@ -11,11 +11,13 @@ import {
 import Image from "next/image";
 import assets from "@/assets";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { toast } from "sonner";
-import { registerPatient } from "@/services/actions/registerPatient";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { modifyPayload } from "@/utils/modifyPayload";
+import { registerPatient } from "@/services/actions/registerPatient";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { userLogin } from "@/services/actions/userLogin";
+import { storeUserInfo } from "@/services/auth.services";
 
 interface IPatientData {
   name: string;
@@ -34,21 +36,25 @@ const RegisterPage = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<IPatientRegisterFormData>();
 
   const onSubmit: SubmitHandler<IPatientRegisterFormData> = async (values) => {
     const data = modifyPayload(values);
     // console.log(data);
-
     try {
       const res = await registerPatient(data);
       // console.log(res);
-
       if (res?.data?.id) {
         toast.success(res?.message);
-        router.push("/login");
+        const result = await userLogin({
+          password: values.password,
+          email: values.patient.email,
+        });
+        if (result?.data?.accessToken) {
+          storeUserInfo({ accessToken: result?.data?.accessToken });
+          router.push("/");
+        }
       }
     } catch (err: any) {
       console.error(err.message);
