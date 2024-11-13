@@ -43,7 +43,7 @@ const LoginPage = () => {
             </Box>
             <Box>
               <Typography variant="h6" fontWeight={600}>
-                Login PH HealthCare
+                Login to Health Care
               </Typography>
             </Box>
           </Stack>
