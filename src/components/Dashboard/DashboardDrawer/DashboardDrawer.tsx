@@ -71,7 +71,7 @@ export default function DashboardDrawer({
               component="div"
               color="primary.main"
             >
-              Welcome To, Health Care !
+              Welcome To, Health Care
             </Typography>
           </Box>
         </Toolbar>
@@ -98,6 +98,7 @@ export default function DashboardDrawer({
             },
           }}
         >
+          {/* This is the sidebar */}
           <SideBar />
         </Drawer>
         <Drawer
@@ -111,6 +112,7 @@ export default function DashboardDrawer({
           }}
           open
         >
+          {/* This is the sidebar */}
           <SideBar />
         </Drawer>
       </Box>
