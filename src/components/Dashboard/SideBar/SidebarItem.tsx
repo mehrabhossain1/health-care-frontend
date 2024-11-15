@@ -16,6 +16,7 @@ const SidebarItem = ({ item }: IProps) => {
   const linkPath = `/dashboard/${item.path}`;
   const pathname = usePathname();
   //   console.log(pathname);
+
   return (
     <Link href={linkPath}>
       <ListItem
