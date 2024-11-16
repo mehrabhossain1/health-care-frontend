@@ -2,10 +2,10 @@ import PHFileUploader from "@/components/forms/PHFileUploader";
 import PHForm from "@/components/forms/PHForm";
 import PHInput from "@/components/forms/PHInput";
 import PHModal from "@/components/shared/PHModal/PHModal";
+import { modifyPayload } from "@/utils/modifyPayload";
 import { Button, Grid } from "@mui/material";
 import React from "react";
 import { FieldValues } from "react-hook-form";
-import { toast } from "sonner";
 
 type TProps = {
   open: boolean;
@@ -14,7 +14,14 @@ type TProps = {
 
 const SpecialtyModal = ({ open, setOpen }: TProps) => {
   const handleFormSubmit = async (values: FieldValues) => {
-    console.log(values);
+    // console.log(values);
+
+    const data = modifyPayload(values);
+
+    try {
+    } catch (err: any) {
+      console.error(err.message);
+    }
   };
 
   return (
