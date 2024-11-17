@@ -16,8 +16,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 const SpecialtiesPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const { data, isLoading } = useGetAllSpecialtiesQuery({});
-  console.log(data, isLoading);
-
+  // console.log(data, isLoading);
   const [deleteSpecialty] = useDeleteSpecialtyMutation();
 
   const handleDelete = async (id: string) => {
@@ -40,7 +39,7 @@ const SpecialtiesPage = () => {
       flex: 1,
       renderCell: ({ row }) => {
         return (
-          <Box>
+          <Box sx={{ height: "100%", display: "flex", alignItems: "center" }}>
             <Image src={row.icon} width={30} height={30} alt="icon" />
           </Box>
         );
