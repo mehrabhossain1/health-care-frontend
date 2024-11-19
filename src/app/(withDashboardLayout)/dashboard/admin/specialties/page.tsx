@@ -70,7 +70,7 @@ const SpecialtiesPage = () => {
       </Stack>
       {!isLoading ? (
         <Box my={2}>
-          <DataGrid rows={data} columns={columns} />
+          <DataGrid rows={data} columns={columns} hideFooter={true} />
         </Box>
       ) : (
         <Box sx={{ display: "flex", justifyContent: "center", mt: 20 }}>
