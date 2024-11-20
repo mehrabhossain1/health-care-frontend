@@ -14,7 +14,17 @@ import CircularProgress from "@mui/material/CircularProgress";
 const DoctorsPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const { data, isLoading } = useGetAllDoctorsQuery({});
+  //! Search functionality - step 1 \Note: We must do everything up of the get query\
+  const query: Record<string, any> = {};
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  // console.log(searchTerm);
+
+  //! Search functionality - step 3 : Set a property in the obj
+  query["searchTerm"] = searchTerm;
+
+  const { data, isLoading } = useGetAllDoctorsQuery({ ...query });
+  //! Search functionality - step 4 : Passing the obj inside the get query
+
   const [deleteDoctor] = useDeleteDoctorMutation();
 
   // console.log(data);
@@ -62,7 +72,12 @@ const DoctorsPage = () => {
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Button onClick={() => setIsModalOpen(true)}>Create New Doctor</Button>
         <DoctorModal open={isModalOpen} setOpen={setIsModalOpen} />
-        <TextField size="small" placeholder="search doctors" />
+        <TextField
+          //! Search functionality - step 2
+          onChange={(e) => setSearchTerm(e.target.value)}
+          size="small"
+          placeholder="search doctors"
+        />
       </Stack>
       {!isLoading ? (
         <Box my={2}>
