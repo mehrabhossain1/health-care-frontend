@@ -10,6 +10,7 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { toast } from "sonner";
 import CircularProgress from "@mui/material/CircularProgress";
+import { useDebounced } from "@/redux/hooks";
 
 const DoctorsPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -19,8 +20,18 @@ const DoctorsPage = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   // console.log(searchTerm);
 
-  //! Search functionality - step 3 : Set a property in the obj
-  query["searchTerm"] = searchTerm;
+  //* useDebounced
+  const debouncedTerm = useDebounced({
+    searchQuery: searchTerm,
+    delay: 600,
+  });
+
+  if (!!debouncedTerm) {
+    //! Search functionality - step 3 : Set a property in the obj
+    query["searchTerm"] = searchTerm;
+  }
+
+  //* useDebounced
 
   const { data, isLoading } = useGetAllDoctorsQuery({ ...query });
   //! Search functionality - step 4 : Passing the obj inside the get query
