@@ -1,4 +1,5 @@
 "use client";
+
 import { Box, Button, IconButton, Stack, TextField } from "@mui/material";
 import DoctorModal from "./components/DoctorModal";
 import { useState } from "react";
